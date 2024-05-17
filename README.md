@@ -1,4 +1,5 @@
 # Smsapi Laravel sms notifications
+
 Laravel SMS Notifications allows you to send SMS from your Laravel application (pl).
 
 ## Install
@@ -23,7 +24,7 @@ routes/web.php
 <?php
 
 use App\Models\User;
-use Atomjoy\Sms\Notifications\OrderSms;
+use Atomjoy\Sms\Notifications\SendSms;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,7 @@ Route::get('/sms', function () {
 
         // Send smss
         $user->notify(
-            new OrderSms(
+            new SendSms(
                 'New Order [%idzdo:smsapi.pl/panel%]',
                 ['48100100100', '44200200200']
             )
@@ -43,7 +44,7 @@ Route::get('/sms', function () {
         // Or with
         Notification::sendNow(
             $user,
-            new OrderSms(
+            new SendSms(
                 'New Order [%idzdo:smsapi.pl/panel%]',
                 ['48100100100', '44200200200']
             )

@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\User;
-use Atomjoy\Sms\Notifications\OrderSms;
+use Atomjoy\Sms\Notifications\SendSms;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 
@@ -10,7 +10,7 @@ Route::get('/smsapisms', function () {
 	try {
 		$user = User::first();
 		$user->notify(
-			new OrderSms(
+			new SendSms(
 				'New Order [%idzdo:smsapi.pl/panel%]',
 				['48100100100']
 			)
@@ -18,7 +18,7 @@ Route::get('/smsapisms', function () {
 
 		Notification::sendNow(
 			$user,
-			new OrderSms(
+			new SendSms(
 				'New Order [%idzdo:smsapi.pl/panel%]',
 				['48100100100']
 			)
