@@ -1,4 +1,4 @@
-# Smsapi Laravel sms notifications
+# Smsapi Laravel sms notifications (pl)
 Laravel SMS Notifications allows you to send SMS from your Laravel application.
 
 ## Install
