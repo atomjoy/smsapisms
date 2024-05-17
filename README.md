@@ -1,4 +1,4 @@
-# Smsapisms Laravel sms notifications
+# Smsapi Laravel sms notifications
 
 ## Install
 
