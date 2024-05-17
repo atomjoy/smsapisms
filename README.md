@@ -16,6 +16,19 @@ config/smsapisms.php
 php artisan vendor:publish --tag=smsapisms-config --force
 ```
 
+## Service
+
+```php
+return [
+    'api_service' => 'pl', // Default smsapi.pl service. Options: [ pl, com, se, bg ]
+    'api_token' => 'EMPTY_API_TOKEN', // Api bearer token
+    'api_from' => 'Test', // Default sms sender name
+    'api_encoding' => 'utf-8',  // Default charset
+    'api_details' => true,  // More response details
+    'api_test' => false,  // Test mode
+];
+```
+
 ## Routes
 
 routes/web.php
@@ -61,4 +74,15 @@ Route::get('/sms', function () {
 
 ```sh
 php artisan serve --host=localhost --port=8000
+```
+
+## Events
+
+```php
+<?php
+
+use Atomjoy\Sms\Events\SmsSent;
+use Atomjoy\Sms\Events\SmsSentError;
+
+// ...
 ```

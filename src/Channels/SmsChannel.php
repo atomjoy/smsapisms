@@ -2,6 +2,8 @@
 
 namespace Atomjoy\Sms\Channels;
 
+use Atomjoy\Sms\Events\SmsSent;
+use Atomjoy\Sms\Events\SmsSentError;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
 use Smsapi\Client\Curl\SmsapiHttpClient;
@@ -44,16 +46,30 @@ class SmsChannel
 		}
 
 		try {
-			$res = (new SmsapiHttpClient())
-				->smsapiPlService(config('smsapisms.api_token', 'EMPTY_API_TOKEN'))
-				->smsFeature()->sendSmss($sms);
+			if (
+				config('smsapisms.api_service') == 'se' ||
+				config('smsapisms.api_service') == 'bg'
+			) {
+				$res = (new SmsapiHttpClient())
+					->smsapiComServiceWithUri(config('smsapisms.api_token', 'EMPTY_API_TOKEN'), 'https://smsapi.io/')
+					->smsFeature()->sendSmss($sms);
+			} else if (config('smsapisms.api_service') == 'com') {
+				$res = (new SmsapiHttpClient())
+					->smsapiComService(config('smsapisms.api_token', 'EMPTY_API_TOKEN'))
+					->smsFeature()->sendSmss($sms);
+			} else {
+				$res = (new SmsapiHttpClient())
+					->smsapiPlService(config('smsapisms.api_token', 'EMPTY_API_TOKEN'))
+					->smsFeature()->sendSmss($sms);
+			}
 
 			$this->log($res, 'SmsSent');
-
+			SmsSent::dispatch($sms, $res);
 			return $res;
 		} catch (\Exception $e) {
 			report($e);
 			$this->log($sms, 'SmsError');
+			SmsSentError::dispatch($sms, $e);
 		}
 	}
 

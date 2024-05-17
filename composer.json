@@ -1,6 +1,6 @@
 {
 	"name": "atomjoy/smsapisms",
-	"description": "SMSAPI SMS Laravel notification channel.",
+	"description": "Smsapi Laravel SMS notifications.",
 	"type": "library",
 	"license": "MIT",
 	"autoload": {
