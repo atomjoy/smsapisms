@@ -1,4 +1,5 @@
 # Smsapi Laravel sms notifications
+Laravel SMS Notifications allows you to send SMS from your Laravel application.
 
 ## Install
 
@@ -55,7 +56,7 @@ Route::get('/sms', function () {
 });
 ```
 
-## Run server
+## Server
 
 ```sh
 php artisan serve --host=localhost --port=8000
