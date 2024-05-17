@@ -17,15 +17,15 @@ class SmsMessage
 
 	public function __construct($mobile, $message)
 	{
-		$this->api_token = config('sms.api_token', '');
-		$this->api_from = config('sms.api_from', 'Test');
-		$this->api_test = (bool) config('sms.api_test', false);
+		$this->api_token = config('smsapisms.api_token', 'EMPTY_API_TOKEN');
+		$this->api_from = config('smsapisms.api_from', 'Test');
+		$this->api_test = (bool) config('smsapisms.api_test', false);
 
 		$this->to($mobile);
 		$this->message($message);
 
 		if (empty($this->api_token)) {
-			throw new \Exception("Config sms api token (sms.api_token).");
+			throw new \Exception("Config sms api token (smsapisms.api_token).");
 		}
 
 		if (empty($this->to) || empty($this->message)) {
