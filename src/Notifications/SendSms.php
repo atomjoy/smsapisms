@@ -48,9 +48,7 @@ class SendSms extends Notification
 	 */
 	public function toSms($notifiable): SendSmsBag|SendSmssBag
 	{
-		$mobile = $this->mobile ?? $notifiable?->mobile ?? '';
-
-		return SendSmssBag::withMessage([...$mobile], $this->message);
+		return SendSmssBag::withMessage($this->mobile, $this->message);
 	}
 
 	/**
@@ -60,11 +58,9 @@ class SendSms extends Notification
 	 */
 	public function toArray($notifiable)
 	{
-		$mobile = $this->mobile ?? $notifiable?->mobile ?? '';
-
 		return [
 			'id' => $notifiable->id,
-			'mobile' => $mobile,
+			'mobile' => $this->mobile,
 			'message' => $this->message,
 		];
 	}
