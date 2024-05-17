@@ -6,6 +6,14 @@
 composer require "atomjoy/smsapisms"
 ```
 
+## Config
+
+config/smsapisms.php
+
+```sh
+php artisan vendor:publish --tag=smsapisms-config --force
+```
+
 ## Routes
 
 routes/web.php
